@@ -4,26 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dr96mabuza/Battleship.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dr96mabuza/Battleship/issues"
+  },
+  "homepage": "https://github.com/dr96mabuza/Battleship#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "css-loader": "^6.7.1",
-    "csv-loader": "^3.0.3",
-    "eslint": "^8.13.0",
+    "eslint": "^8.14.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "jest": "^27.5.1",
-    "json5": "^2.2.1",
     "style-loader": "^3.3.1",
-    "toml": "^3.0.0",
     "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2",
-    "xml-loader": "^1.2.1",
-    "yamljs": "^0.3.0"
+    "webpack-cli": "^4.9.2"
   }
 }
