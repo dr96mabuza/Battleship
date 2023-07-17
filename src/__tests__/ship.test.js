@@ -1,4 +1,4 @@
-const ship = require("./ship.js");
+const ship = require("./../components/ship");
 
 test("tests the length of the ship, if it is hit and if its sunk", () => {
   expect(ship("battleship", 5)).toEqual({
