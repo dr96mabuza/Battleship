@@ -1,34 +1,25 @@
 const ship = (shipName) => {
-  const array = [];
-  const hitLocation = [];
-
+  let size = 0;
   if (shipName === "Carrier") {
-    array.length = 5;
-  }
-  if (shipName === "battleship") {
-    array.length = 4;
-  }
-  if (shipName === "Cruiser" || shipName === "Submarine") {
-    array.length = 3;
-  }
-  if (shipName === "Destroyer") {
-    array.length = 2;
+    size = 5;
+  }else if (shipName === "battleship") {
+    size = 4;
+  }else if (shipName === "Cruiser" || shipName === "Submarine") {
+    size = 3;
+  }else if (shipName === "Destroyer") {
+    size = 2;
   }
 
-  function length() {
-    return array.length;
+  const obj = {
+    name: shipName,
+    size: size,
+    sunk: false,
+    getSize() { return this.size; },
+    // setSunk(sunk) { this.sunk = sunk; },
+    // getSunk() { return this.sunk; },
+    getName() { return this.name; }
   }
-
-  const hit = (num) => {
-    hitLocation[num] = "hit";
-    return hitLocation;
-  };
-
-  const isSunk = () => {
-    const sink = hitLocation.every((x) => x === "hit");
-    return sink;
-  };
-  return { length, hit, isSunk };
+  return obj;
 };
 
 module.exports = ship;

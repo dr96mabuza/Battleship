@@ -1,11 +1,11 @@
 const ship = require("./../components/ship");
+let battleship;
+beforeEach(() => {
+  battleship = ship("battleship");
+})
 
 test("tests the length of the ship, if it is hit and if its sunk", () => {
-  expect(ship("battleship", 5)).toEqual({
-    Length: 4,
-    hit: ["", "", "", "", "", "hit"],
-    isSunk: false,
-  });
+  expect(battleship.getName()).toEqual("battleship")
 });
 
 test.skip("test some", () => {
