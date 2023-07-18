@@ -1,8 +1,8 @@
-const board = require("./../components/gameBoard");
+const gameBoard = require("./../components/gameBoard");
 
-BeforeEach(() => {
+let board = gameBoard();
 
-})
-
-test("", () => {});
-test("", () => {});
+test("", () => {
+    expect(board).toStrictEqual({})
+});
+// test("", () => {});

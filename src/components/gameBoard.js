@@ -1,3 +1,6 @@
-const board = () => {}
+const gameBoard = () => {
+    // const size = size;
+    return {};
+}
 
-export default board
+module.exports = gameBoard;
