@@ -1,25 +1,33 @@
 const ship = (shipName) => {
-  let size = 0;
-  if (shipName === "Carrier") {
-    size = 5;
-  }else if (shipName === "battleship") {
-    size = 4;
-  }else if (shipName === "Cruiser" || shipName === "Submarine") {
-    size = 3;
-  }else if (shipName === "Destroyer") {
-    size = 2;
+
+  /**
+   * get the size for the correct ship.
+   * @param { string } name 
+   * @returns { Number } 
+   */
+  const getShipSize = (name) => {
+    const sizes = { "battleship":4, "carrier": 5, "cruiser": 3, "submarine": 3, "destroyer": 2 };
+    return sizes[name];
   }
 
-  const obj = {
-    name: shipName,
-    size: size,
-    sunk: false,
-    getSize() { return this.size; },
-    // setSunk(sunk) { this.sunk = sunk; },
-    // getSunk() { return this.sunk; },
-    getName() { return this.name; }
+  const size = getShipSize(shipName);
+  let sunk = false;
+  const name = shipName;
+  let hits = 0;
+
+  const increamentHits = () => { hits += 1; }; 
+  const checkIfSunk = () => { size == hits ? sunk = true : null; }
+  const handleHit = () => {
+    increamentHits();
+    checkIfSunk();
   }
-  return obj;
+ 
+  return {
+    getSize() { return size; },
+    getSunk() { return sunk; },
+    getName() { return name; },
+    isHit() { handleHit(); }
+  };
 };
 
 module.exports = ship;
