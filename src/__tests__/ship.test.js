@@ -31,11 +31,11 @@ test("test get name returns correct name.", () => {
 });
 
 test("test if ship object legth is correct.", () => {
-  expect(Object.keys(battleship).length).toEqual(4);
-  expect(Object.keys(carrier).length).toEqual(4);
-  expect(Object.keys(cruiser).length).toEqual(4);
-  expect(Object.keys(submarine).length).toEqual(4);
-  expect(Object.keys(destroyer).length).toEqual(4);
+  expect(Object.keys(battleship).length).toEqual(5);
+  expect(Object.keys(carrier).length).toEqual(5);
+  expect(Object.keys(cruiser).length).toEqual(5);
+  expect(Object.keys(submarine).length).toEqual(5);
+  expect(Object.keys(destroyer).length).toEqual(5);
 });
 
 test("test that sunk and hit works", () => {

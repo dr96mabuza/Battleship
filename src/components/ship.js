@@ -1,3 +1,5 @@
+import uuidv4 from "uuid/v4";
+
 const ship = (shipName) => {
 
   /**
@@ -14,6 +16,7 @@ const ship = (shipName) => {
   let sunk = false;
   const name = shipName;
   let hits = 0;
+  const id = uuidv4();
 
   const increamentHits = () => { hits += 1; }; 
   const checkIfSunk = () => { size == hits ? sunk = true : null; }
@@ -23,11 +26,12 @@ const ship = (shipName) => {
   }
  
   return {
+    getName() { return name; },
     getSize() { return size; },
     getSunk() { return sunk; },
-    getName() { return name; },
+    getId() { return id; },
     isHit() { handleHit(); }
   };
 };
 
-module.exports = ship;
+export default ship;

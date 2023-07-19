@@ -18,7 +18,8 @@ test("test place ship into game board.", () => {
         });
     });
 
-    expect(board.placeShip(ship("battleship"), "y", 1, 3)).toBe(true);
+    const ship = ship("battleship");
+    expect(board.placeShip(ship, "y", 1, 3)).toBe(true);
     expect(board.getBoard()[1].every(item => { item == ""})).toBeFalsy();
 
     const expected = (board.getBoard()[1]).filter((item) => {
