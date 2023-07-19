@@ -18,12 +18,12 @@ test("test place ship into game board.", () => {
         });
     });
 
-    const ship = ship("battleship");
-    expect(board.placeShip(ship, "y", 1, 3)).toBe(true);
+    const battleship = ship("battleship");
+    expect(board.placeShip(battleship, "y", 1, 3)).toBe(true);
     expect(board.getBoard()[1].every(item => { item == ""})).toBeFalsy();
 
     const expected = (board.getBoard()[1]).filter((item) => {
-        if (item !== "") {
+        if (item !== "" && item === battleship.getId()) {
             return (board.getBoard()[1]).indexOf(item);
         }
         // return item

@@ -37,7 +37,7 @@ const gameBoard = () => {
             const end = startLocation + shipObject.getSize();
             const innerArray = board[arrayIndex];
             for (let index = start; index < end; index++) {
-                innerArray[index] = shipObject;
+                innerArray[index] = shipObject.getId();
             }
             
             return true;
