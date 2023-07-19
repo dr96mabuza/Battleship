@@ -2,7 +2,7 @@ const ship = (shipName) => {
 
   /**
    * get the size for the correct ship.
-   * @param { string } name 
+   * @param { String } name 
    * @returns { Number } 
    */
   const getShipSize = (name) => {

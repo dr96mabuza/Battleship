@@ -12,8 +12,20 @@ test("test game board.", () => {
 
 });
 test("test place ship into game board.", () => {
-    board.placeShip(ship("battleship"), "y", 1, 3);
-    board.getBoard().forEach((element) => {
-        element.length > 0 ? expect(typeof element[0]).toBe("object") : null; 
+    board.getBoard().forEach(element => {
+        element.forEach(item => {
+            expect(item).toBe("");
+        });
     });
+
+    expect(board.placeShip(ship("battleship"), "y", 1, 3)).toBe(true);
+    expect(board.getBoard()[1].every(item => { item == ""})).toBeFalsy();
+
+    const expected = (board.getBoard()[1]).filter((item) => {
+        if (item !== "") {
+            return (board.getBoard()[1]).indexOf(item);
+        }
+        // return item
+    });
+    expect(expected).toBe([3, 4, 5, 6]);
 });
