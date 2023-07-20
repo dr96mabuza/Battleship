@@ -46,25 +46,71 @@ const gameBoard = () => {
      * @returns { Boolean }
      */
     const yAxisPlacement = (shipObject, arrayIndex, startLocation) => {
+
         const end = startLocation + shipObject.getSize();
-        if (startLocation >= 0 && end < getBoard()[arrayIndex].length && 0 < arrayIndex < getBoard().length ) {
+
+        /**
+         * A function to populate the array if the slot is empty("").
+         * Must not populate if the position is taken.
+         * Slot is populated with the ship object id.
+         * Population will be limited to one array.
+         */
+        const populate = () => {
             for (let index = startLocation; index < end; index++) {
-                getBoard()[arrayIndex][index] = shipObject.getId();
+                if (getBoard()[arrayIndex][index] == "") {
+                    getBoard()[arrayIndex][index] = shipObject.getId();
+                }
             }
-            
+        };
+        
+        if (
+            startLocation >= 0 
+            && end < getBoard()[arrayIndex].length 
+            && 0 < arrayIndex < getBoard().length 
+            ) {
+            populate();
             return true;
         }
 
         return false;
     };
 
+    /**
+     * if the ship size is within the array length, 
+     * place the ship from the starting position until the end position.
+     * ship will span across multiple array.
+     * 
+     * @param { Object } shipObject 
+     * @param { Number } arrayIndex 
+     * @param { Number} startLocation 
+     * @returns { Boolean }
+     */
     const xAxisPlacement = (shipObject, arrayIndex, startLocation) => {
-        try {
-            const end = startLocation + shipObject.getSize();
-            
-        } catch (error) {
-            return false;
+        const end = startLocation + shipObject.getSize();
+
+        /**
+         * A function to populate the array if the slot is empty("").
+         * Must not populate if the position is taken.
+         * Slot is populated with the ship object id.
+         * Population will be limited span across multiple arrays.
+         */
+        const populate = () => {
+            for (let index = arrayIndex; index < end - 1; index++) {
+                if (getBoard()[index][startLocation] == "") {
+                    getBoard()[index][startLocation] = shipObject.getId();
+                }
+            }
+        };
+
+        if (
+            startLocation >= 0 
+            && end < getBoard()[arrayIndex].length 
+            && 0 < arrayIndex < getBoard().length 
+            ) {
+            populate();
+            return true;
         }
+        return false;
     };
 
     /**
@@ -77,17 +123,11 @@ const gameBoard = () => {
      * @returns { Boolean }
      */
     const placeShip = (shipObject, axis, index, startLocation) => {
-
-        try {
-            switch(axis) {
-                case "y":
-                    return yAxisPlacement(shipObject, index, startLocation);
-                case "x":
-                    break;
-            }
-
-        } catch (error) {
-            // inform user of error.
+        switch(axis) {
+            case "y":
+                return yAxisPlacement(shipObject, index, startLocation);
+            case "x":
+                return xAxisPlacement(shipObject, index, startLocation);
         }
     };
 

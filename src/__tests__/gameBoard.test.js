@@ -10,7 +10,8 @@ test("test game board.", () => {
     });
 
 });
-test("test placing one ship into an empty game board. at different axis on new board.", () => {
+
+test("test placing one ship into an empty game board. placement on the y axis.", () => {
     // y axis ship placement.
     let board = gameBoard();
     board.getBoard().forEach(element => {
@@ -32,17 +33,23 @@ test("test placing one ship into an empty game board. at different axis on new b
     expect(ind).toStrictEqual([3, 4, 5, 6]);
     expect(board.placeShip(battleship, "y", 1, 50)).toBeFalsy();
     expect(board.placeShip(battleship, "y", 1, "50")).toBeFalsy();
+});
 
-    // x-axis ship placement.
-    let board2 = gameBoard();
-    board2.getBoard().forEach(element => {
+test("test placing one ship into an empty game board. placement on the x axis.", () => {
+    // x axis ship placement.
+    let board = gameBoard();
+    board.getBoard().forEach(element => {
         element.forEach(item => {
             expect(item).toBe("");
         });
     });
 
-    const cruiser = ship("cruiser");
-    expect(board2.placeShip(cruiser, "x", 5, 100)).toBe(true);
+    const battleship = ship("battleship");
+    expect(board.placeShip(battleship, "x", 1, 3)).toBe(true);
 
-    // console.log(cruiser.getSize())
+    [1, 2, 3, 4].forEach(item => {
+        expect(board.getBoard()[item][3]).toBe(battleship.getId())
+    });
+
+    
 });
