@@ -46,16 +46,23 @@ const gameBoard = () => {
      * @returns { Boolean }
      */
     const yAxisPlacement = (shipObject, arrayIndex, startLocation) => {
-
-        try {
-            const end = startLocation + shipObject.getSize();
+        const end = startLocation + shipObject.getSize();
+        if (startLocation >= 0 && end < getBoard()[arrayIndex].length && 0 < arrayIndex < getBoard().length ) {
             for (let index = startLocation; index < end; index++) {
                 getBoard()[arrayIndex][index] = shipObject.getId();
             }
             
             return true;
+        }
+
+        return false;
+    };
+
+    const xAxisPlacement = (shipObject, arrayIndex, startLocation) => {
+        try {
+            const end = startLocation + shipObject.getSize();
+            
         } catch (error) {
-            // return error
             return false;
         }
     };
