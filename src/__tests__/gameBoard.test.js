@@ -11,7 +11,7 @@ test("test game board.", () => {
     });
 
 });
-test("test place ship into game board.", () => {
+test("test placing one ship into game board.", () => {
     board.getBoard().forEach(element => {
         element.forEach(item => {
             expect(item).toBe("");
@@ -22,11 +22,11 @@ test("test place ship into game board.", () => {
     expect(board.placeShip(battleship, "y", 1, 3)).toBe(true);
     expect(board.getBoard()[1].every(item => { item == ""})).toBeFalsy();
 
-    const expected = (board.getBoard()[1]).filter((item) => {
-        if (item !== "" && item === battleship.getId()) {
-            return (board.getBoard()[1]).indexOf(item);
+    let ind = [];
+    for (let index = 0; index < board.getBoard()[1].length; index++) {
+        if (board.getBoard()[1][index] === battleship.getId()) {
+            ind.push(index);
         }
-        // return item
-    });
-    expect(expected).toBe([3, 4, 5, 6]);
+    }
+    expect(ind).toStrictEqual([3, 4, 5, 6]);
 });

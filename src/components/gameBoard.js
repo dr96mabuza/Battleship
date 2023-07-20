@@ -1,7 +1,16 @@
+/**
+ * A factory function to create a board object to store 
+ * the information about the player board.
+ * Returns an object that has methods that allow the player to place ships 
+ * and take hits from the opponent.
+ * 
+ * @returns { Object }
+ */
 const gameBoard = () => {
 
     /**
-     * create a board with 50 positions.
+     * create a board with a set amount of available positions.
+     * 
      * @returns { Array }
      */
     const generateBoard = () => {
@@ -21,7 +30,8 @@ const gameBoard = () => {
 
     /**
      * get the game board with the latest data.
-     * @returns { gameBoard }
+     * 
+     * @returns { Array }
      */
     const getBoard = () => { return board; };
 
@@ -29,15 +39,18 @@ const gameBoard = () => {
      * if the ship size is within the array length, 
      * place the ship from the starting position until the end position.
      * ship will be contained within one inner array.
+     * 
+     * @param { Object } shipObject 
+     * @param { Number } arrayIndex 
+     * @param { Number} startLocation 
+     * @returns { Boolean }
      */
     const yAxisPlacement = (shipObject, arrayIndex, startLocation) => {
 
         try {
-            const start = board[arrayIndex][startLocation];
             const end = startLocation + shipObject.getSize();
-            const innerArray = board[arrayIndex];
-            for (let index = start; index < end; index++) {
-                innerArray[index] = shipObject.getId();
+            for (let index = startLocation; index < end; index++) {
+                getBoard()[arrayIndex][index] = shipObject.getId();
             }
             
             return true;
@@ -49,10 +62,12 @@ const gameBoard = () => {
 
     /**
      * place the ship selected by the user in the board.
-     * @param { ship } shipObject 
+     * 
+     * @param { Object } shipObject 
      * @param { String } axis 
      * @param { Number } index // index of the array inside the board array.
      * @param { Number } startLocation // column index
+     * @returns { Boolean }
      */
     const placeShip = (shipObject, axis, index, startLocation) => {
 
