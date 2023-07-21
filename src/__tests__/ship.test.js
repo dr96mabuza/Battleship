@@ -12,7 +12,7 @@ beforeEach(() => {
   cruiser = ship("cruiser");
   submarine = ship("submarine");
   destroyer = ship("destroyer");
-})
+});
 
 test("tests the length of the ships is correct.", () => {
   expect(battleship.getSize()).toBe(4);
