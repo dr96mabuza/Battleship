@@ -74,5 +74,7 @@ test("Multiple ships placement in one board.", () => {
 
   expect(board.allPlaced()).toBeFalsy();
 
+  expect(board.placeShip(carrier, "y", 5, 4)).toBeTruthy()
+  expect(board.placeShip(cruiser, "x", 2, 3)).toBeTruthy()
   expect(board.allPlaced()).toBeTruthy();
 });
