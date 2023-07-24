@@ -33,7 +33,13 @@ const gameBoard = () => {
     "submarine": false,
     "destroyer": false
   }
+  let ships = [];
 
+  /**
+   * Check if all the ships are placed.
+   * 
+   * @returns { Boolean }
+   */
   const allPlaced = () => {
     // eslint-disable-next-line no-restricted-syntax
     for (const key in placedShips) {
@@ -95,6 +101,7 @@ const gameBoard = () => {
       placedShips[shipObject.getName()] === false
     ) {
       populate();
+      ships.push(shipObject);
       placedShips[shipObject.getName()] = true;
       return true;
     }
@@ -151,6 +158,7 @@ const gameBoard = () => {
       placedShips[shipObject.getName()] === false
     ) {
       populate();
+      ships.push(shipObject);
       placedShips[shipObject.getName()] = true;
       return true;
     }
@@ -174,7 +182,25 @@ const gameBoard = () => {
     }
   };
 
-  return { getBoard, placeShip, allPlaced };
+  const receiveAttack = (outerIndex, innerIndex) => {
+    if (getBoard()[outerIndex][innerIndex] === "") {return false;}
+    ships = ships.map(item => {
+      if (
+        getBoard()[outerIndex][innerIndex] === item.getId() &&
+        !item.isSunk()
+        ) {
+        item.isHit();
+        return item;
+      }
+      
+      return item;
+    });
+
+    return true;
+    
+  }
+
+  return { getBoard, placeShip, allPlaced, receiveAttack };
 };
 
 export default gameBoard;

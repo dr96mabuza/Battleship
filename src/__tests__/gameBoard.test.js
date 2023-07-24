@@ -78,3 +78,11 @@ test("Multiple ships placement in one board.", () => {
   expect(board.placeShip(cruiser, "x", 2, 3)).toBeTruthy()
   expect(board.allPlaced()).toBeTruthy();
 });
+
+test("test receiveAttack function works.", () => {
+  const board = gameBoard();
+  const cruiser = ship("cruiser");
+  board.placeShip(cruiser, "x", 2, 3);
+
+  expect(board.receiveAttack(1, 3)).toBeFalsy();
+});
