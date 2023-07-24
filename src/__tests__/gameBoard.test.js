@@ -1,8 +1,11 @@
-import gameBoard from "./../components/gameBoard";
-import ship from "./../components/ship";
+/* eslint-disable no-plusplus */
+/* eslint-disable no-undef */
+import gameBoard from "../components/gameBoard";
+import ship from "../components/ship";
 
+// eslint-disable-next-line no-undef
 test("test game board.", () => {
-  let board = gameBoard();
+  const board = gameBoard();
   expect(typeof board.getBoard()).toStrictEqual("object");
   expect(Object.keys(board.getBoard()).length).toStrictEqual(50);
   board.getBoard().forEach((element) => {
@@ -10,9 +13,9 @@ test("test game board.", () => {
   });
 });
 
-test("test placing one ship into an empty game board. placement on the y axis.", () => {
+test("test placing one ship into an empty game board. \nplacement on the y axis.", () => {
   // y axis ship placement.
-  let board = gameBoard();
+  const board = gameBoard();
   board.getBoard().forEach((element) => {
     element.forEach((item) => {
       expect(item).toBe("");
@@ -22,12 +25,10 @@ test("test placing one ship into an empty game board. placement on the y axis.",
   const battleship = ship("battleship");
   expect(board.placeShip(battleship, "y", 1, 3)).toBe(true);
   expect(
-    board.getBoard()[1].every((item) => {
-      item == "";
-    }),
+    board.getBoard()[1].every((item) => item === ""),
   ).toBeFalsy();
 
-  let ind = [];
+  const ind = [];
   for (let index = 0; index < board.getBoard()[1].length; index++) {
     if (board.getBoard()[1][index] === battleship.getId()) {
       ind.push(index);
@@ -38,13 +39,11 @@ test("test placing one ship into an empty game board. placement on the y axis.",
   expect(board.placeShip(battleship, "y", 1, "50")).toBeFalsy();
 });
 
-test("test placing one ship into an empty game board. placement on the x axis.", () => {
+test("test placing one ship into an empty game board. \nplacement on the x axis.", () => {
   // x axis ship placement.
-  let board = gameBoard();
+  const board = gameBoard();
   board.getBoard().forEach((element) => {
-    element.forEach((item) => {
-      expect(item).toBe("");
-    });
+    element.forEach((item) => expect(item).toBe(""));
   });
 
   const battleship = ship("battleship");
@@ -53,4 +52,20 @@ test("test placing one ship into an empty game board. placement on the x axis.",
   [1, 2, 3, 4].forEach((item) => {
     expect(board.getBoard()[item][3]).toBe(battleship.getId());
   });
+  expect(board.getBoard()[5][3]).toBe("")
+  expect(board.getBoard()[0][3]).toBe("")
+  expect(board.placeShip(battleship, "y", 1, "50")).toBeFalsy();
+});
+
+test("Multiple ships placement in one board.", () => {
+  const board = gameBoard();
+  const battleship = ship("battleship");
+  const carrier = ship("carrier");
+  const cruiser = ship("cruiser");
+  const submarine = ship("submarine");
+  const destroyer = ship("destroyer");
+
+  expect(board.placeShip(battleship, "y", 1, 5)).toBeTruthy();
+  expect(board.placeShip(carrier, "y", 1, 5)).toBeFalsy();
+  expect(board.placeShip(carrier, "y", 1, 7)).toBeFalsy();
 });

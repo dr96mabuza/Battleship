@@ -1,9 +1,9 @@
 /* eslint-disable no-plusplus */
 /**
  * A factory function to create a board object to store
- * the information about the player board.
- * Returns an object that has methods that allow the player to place ships
- * and take hits from the opponent.
+ * \nthe information about the player board.
+ * \nReturns an object that has methods that allow the player to place ships
+ * \nand take hits from the opponent.
  *
  * @returns { Object }
  */
@@ -36,8 +36,8 @@ const gameBoard = () => {
 
   /**
    * if the ship size is within the array length,
-   * place the ship from the starting position until the end position.
-   * ship will be contained within one inner array.
+   * \nplace the ship from the starting position until the end position.
+   * \nship will be contained within one inner array.
    *
    * @param { Object } shipObject
    * @param { Number } arrayIndex
@@ -49,9 +49,9 @@ const gameBoard = () => {
 
     /**
      * A function to populate the array if the slot is empty("").
-     * Must not populate if the position is taken.
-     * Slot is populated with the ship object id.
-     * Population will be limited to one array.
+     * \nMust not populate if the position is taken.
+     * \nSlot is populated with the ship object id.
+     * \nPopulation will be limited to one array.
      */
     const populate = () => {
       for (let index = startLocation; index < end; index++) {
@@ -61,10 +61,20 @@ const gameBoard = () => {
       }
     };
 
+    /**
+     * 
+     * @returns { Boolean }
+     */
+    const allSlotsAvailable = () => {
+      const li = getBoard()[arrayIndex].slice(startLocation,end);
+      return (li.every(element => element === ""));
+    };
+
     if (
       startLocation >= 0 &&
       end < getBoard()[arrayIndex].length &&
-      arrayIndex > 0 < getBoard().length
+      arrayIndex > 0 < getBoard().length &&
+      allSlotsAvailable()
     ) {
       populate();
       return true;
@@ -75,8 +85,8 @@ const gameBoard = () => {
 
   /**
    * if the ship size is within the array length,
-   * place the ship from the starting position until the end position.
-   * ship will span across multiple array.
+   * \nplace the ship from the starting position until the end position.
+   * \nship will span across multiple array.
    *
    * @param { Object } shipObject
    * @param { Number } arrayIndex
@@ -84,26 +94,31 @@ const gameBoard = () => {
    * @returns { Boolean }
    */
   const xAxisPlacement = (shipObject, arrayIndex, startLocation) => {
-    const end = startLocation + shipObject.getSize();
+    const end = arrayIndex + shipObject.getSize();
 
     /**
      * A function to populate the array if the slot is empty("").
-     * Must not populate if the position is taken.
-     * Slot is populated with the ship object id.
-     * Population will be limited span across multiple arrays.
+     * \nMust not populate if the position is taken.
+     * \nSlot is populated with the ship object id.
+     * \nPopulation will be limited span across multiple arrays.
      */
     const populate = () => {
-      for (let index = arrayIndex; index < end - 1; index++) {
+      for (let index = arrayIndex; index < end; index++) {
         if (getBoard()[index][startLocation] === "") {
           getBoard()[index][startLocation] = shipObject.getId();
         }
       }
     };
 
+    const allSlotsAvailable = () => {
+      
+    };
+
     if (
       startLocation >= 0 &&
       end < getBoard()[arrayIndex].length &&
-      arrayIndex > 0 < getBoard().length
+      arrayIndex > 0 < getBoard().length &&
+      allSlotsAvailable()
     ) {
       populate();
       return true;

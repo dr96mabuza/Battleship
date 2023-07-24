@@ -1,4 +1,6 @@
-const ship = require("./../components/ship");
+/* eslint-disable no-plusplus */
+/* eslint-disable no-undef */
+import ship from "../components/ship";
 
 let battleship;
 let carrier;
