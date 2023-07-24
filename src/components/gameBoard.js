@@ -26,6 +26,13 @@ const gameBoard = () => {
   };
 
   const board = generateBoard();
+  const placedShips = {      
+    "battleship": false,
+    "carrier": false,
+    "cruiser": false,
+    "submarine": false,
+    "destroyer": false
+  }
 
   /**
    * get the game board with the latest data.
@@ -62,7 +69,8 @@ const gameBoard = () => {
     };
 
     /**
-     * 
+     * Check if all the slots are available.
+     * \n if available return "True", else should be "False".
      * @returns { Boolean }
      */
     const allSlotsAvailable = () => {
@@ -74,9 +82,11 @@ const gameBoard = () => {
       startLocation >= 0 &&
       end < getBoard()[arrayIndex].length &&
       arrayIndex > 0 < getBoard().length &&
-      allSlotsAvailable()
+      allSlotsAvailable() &&
+      placedShips[shipObject.getName()] === false
     ) {
       populate();
+      placedShips[shipObject.getName()] = true;
       return true;
     }
 
@@ -110,6 +120,11 @@ const gameBoard = () => {
       }
     };
 
+    /**
+     * Check if all the slots are available.
+     * \n if available return "True", else should be "False".
+     * @returns { Boolean }
+     */
     const allSlotsAvailable = () => {
       const usedLists = getBoard().slice(arrayIndex, end);
       const items = [];
@@ -123,9 +138,11 @@ const gameBoard = () => {
       startLocation >= 0 &&
       end < getBoard()[arrayIndex].length &&
       arrayIndex > 0 < getBoard().length &&
-      allSlotsAvailable()
+      allSlotsAvailable() &&
+      placedShips[shipObject.getName()] === false
     ) {
       populate();
+      placedShips[shipObject.getName()] = true;
       return true;
     }
     return false;
