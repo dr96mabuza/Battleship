@@ -15,9 +15,9 @@ const gameBoard = () => {
    */
   const generateBoard = () => {
     const array = [];
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < 10; index++) {
       const innerArray = [];
-      for (let j = 0; j < 50; j++) {
+      for (let j = 0; j < 10; j++) {
         innerArray[j] = "";
       }
       array.push(innerArray);
@@ -66,8 +66,8 @@ const gameBoard = () => {
      * @returns { Boolean }
      */
     const allSlotsAvailable = () => {
-      const li = getBoard()[arrayIndex].slice(startLocation,end);
-      return (li.every(element => element === ""));
+      const selectedSlots = getBoard()[arrayIndex].slice(startLocation,end);
+      return selectedSlots.every(element => element === "");
     };
 
     if (
@@ -111,7 +111,12 @@ const gameBoard = () => {
     };
 
     const allSlotsAvailable = () => {
-      
+      const usedLists = getBoard().slice(arrayIndex, end);
+      const items = [];
+      usedLists.forEach(element => {
+        items.push(element[startLocation]);
+      });
+      return items.every(element => element === "");
     };
 
     if (
