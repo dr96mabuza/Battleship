@@ -34,6 +34,15 @@ const gameBoard = () => {
     "destroyer": false
   }
 
+  const allPlaced = () => {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in placedShips) {
+      if (placedShips[key] === false) { return false; }
+    }
+
+    return true
+  };
+
   /**
    * get the game board with the latest data.
    *
@@ -165,7 +174,7 @@ const gameBoard = () => {
     }
   };
 
-  return { getBoard, placeShip };
+  return { getBoard, placeShip, allPlaced };
 };
 
 export default gameBoard;
