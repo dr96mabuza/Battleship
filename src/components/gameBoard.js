@@ -139,6 +139,7 @@ const gameBoard = () => {
     /**
      * Check if all the slots are available.
      * \n if available return "True", else should be "False".
+     * 
      * @returns { Boolean }
      */
     const allSlotsAvailable = () => {
@@ -182,25 +183,44 @@ const gameBoard = () => {
     }
   };
 
-  const receiveAttack = (outerIndex, innerIndex) => {
-    if (getBoard()[outerIndex][innerIndex] === "") {return false;}
+  /**
+   * A function that hits a specific ship using the ships id.
+   * \nHit should be called is the id is correct and "sunk" is "false".
+   * 
+   * @param { Number } outerIndex 
+   * @param { Number } innerIndex 
+   */
+  const hitShip = (outerIndex, innerIndex) => {
     ships = ships.map(item => {
       if (
         getBoard()[outerIndex][innerIndex] === item.getId() &&
-        !item.isSunk()
+        !item.getSunk()
         ) {
         item.isHit();
         return item;
       }
-      
       return item;
     });
+  };
 
+  /**
+   * A function to allow the board to be able to take attacks from an opponent.
+   * \nReturns a "Boolean" after attack is received."
+   * \n If a ship is hit the function should return "true".
+   * \nIf miss, "false".
+   * @param { Number } outerIndex 
+   * @param { Number } innerIndex 
+   * @returns { Boolean }
+   */
+  const receiveAttack = (outerIndex, innerIndex) => {
+    if (getBoard()[outerIndex][innerIndex] === "") {return false;}
+    hitShip(outerIndex, innerIndex);
     return true;
-    
   }
 
-  return { getBoard, placeShip, allPlaced, receiveAttack };
+  const allShipsSunk = () => ships.every(ship => ship.getSunk());
+
+  return { getBoard, placeShip, allPlaced, receiveAttack, allShipsSunk };
 };
 
 export default gameBoard;
