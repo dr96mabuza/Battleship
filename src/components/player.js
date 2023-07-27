@@ -33,6 +33,14 @@ const player = ( name ) => {
         }
     };
 
+    // const attack = (opponent, outerIndex, innerIndex) => {
+    //     try {
+            
+    //     } catch (error) {
+    //         console.log(`${error}`)
+    //     }
+    // }
+
     if (getName() === "computer") {
         return { 
             getName, 
