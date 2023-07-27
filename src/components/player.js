@@ -1,4 +1,5 @@
 import gameBoard from "./gameBoard";
+import ship from "./ship";
 
 const player = ( name ) => {
 
@@ -19,14 +20,13 @@ const player = ( name ) => {
     const getRandomAxis = () => ["x", "y"][Math.floor(Math.random() * 2)];
 
     function randomlyPlaceShips() {
-        // const aiShipsLocations = [];
-        while (!board.allPlaced()) {
+        while (board.allPlaced() === false) {
             const outerIndex = generateRandomIndex();
             const innerIndex = generateRandomIndex();
             const axis = getRandomAxis();
-            const ship = getRandomShip();
-            if (board.placeShip(ship, axis, outerIndex, innerIndex)) {
-                board.placeShip(ship, axis, outerIndex, innerIndex);
+            const shipType = ship(getRandomShip());
+            if (board.placeShip(shipType, axis, outerIndex, innerIndex)) {
+                board.placeShip(shipType, axis, outerIndex, innerIndex);
             }
         }
     };
