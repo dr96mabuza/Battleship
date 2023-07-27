@@ -8,25 +8,27 @@ const player = ( name ) => {
     const getPlayerBoard = () => board; 
 
     const generateRandomIndex = () => Math.floor(Math.random() * 10);
-    const getRandomShip = () => (
-        [
-            "battleship",
-            "carrier",
-            "cruiser",
-            "submarine",
-            "destroyer"
-        ][Math.floor(Math.random() * 4)]
+    const getRandomShip = (shipsNotPlaced) => (
+        shipsNotPlaced[Math.floor(Math.random() * shipsNotPlaced.length)]
     );
     const getRandomAxis = () => ["x", "y"][Math.floor(Math.random() * 2)];
 
     function randomlyPlaceShips() {
         while (board.allPlaced() === false) {
+            const shipsNotPlaced = [
+                "battleship",
+                "carrier",
+                "cruiser",
+                "submarine",
+                "destroyer"
+            ];
             const outerIndex = generateRandomIndex();
             const innerIndex = generateRandomIndex();
             const axis = getRandomAxis();
-            const shipType = ship(getRandomShip());
+            const shipName = getRandomShip(shipsNotPlaced);
+            const shipType = ship(shipName);
             if (board.placeShip(shipType, axis, outerIndex, innerIndex)) {
-                board.placeShip(shipType, axis, outerIndex, innerIndex);
+                shipsNotPlaced.splice(shipsNotPlaced.indexOf(shipName), 1);
             }
         }
     };
