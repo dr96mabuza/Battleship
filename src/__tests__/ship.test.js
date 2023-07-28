@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
-import ship from "../components/ship";
+import ship from "../factories/ship";
 
 let battleship;
 let carrier;

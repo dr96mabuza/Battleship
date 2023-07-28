@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
-import gameBoard from "../components/gameBoard";
-import ship from "../components/ship";
+import gameBoard from "../factories/gameBoard";
+import ship from "../factories/ship";
 
 // eslint-disable-next-line no-undef
 test("test game board.", () => {

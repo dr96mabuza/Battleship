@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import player from "../components/player";
+import player from "../factories/player";
 
 test("create new player", () => {
     expect(typeof player("computer")).toBe("object");
