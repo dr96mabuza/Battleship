@@ -17,5 +17,19 @@ test("test if player returns player board.", () => {
 test("place ships randomly if computer is playing", () => {
     const ai = player("computer");
     ai.randomlyPlaceShips();
-    expect(ai.getPlayerBoard().allPlaced()).toBeTruthy()
+    expect(ai.getPlayerBoard().allPlaced()).toBeTruthy();
+});
+
+test("test computer attack opponent", () => {
+    const ai = player("computer");
+    const user = player("user");
+    ai.randomlyPlaceShips();
+    user.randomlyPlaceShips();
+    expect(ai.getPlayerBoard().allPlaced()).toBeTruthy();
+    expect(user.getPlayerBoard().allPlaced()).toBeTruthy();
+
+    while (!user.getPlayerBoard().allShipsSunk()) {
+        ai.attack(user)
+    }
+    expect(user.user.getPlayerBoard().allShipsSunk()).toBeTruthy();
 });
