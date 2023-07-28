@@ -33,3 +33,14 @@ test("test computer attack opponent", () => {
     // }
     // expect(user.user.getPlayerBoard().allShipsSunk()).toBeTruthy();
 });
+
+test("test user attack", () => {
+    const ai = player("computer");
+    const user = player("user");
+    ai.randomlyPlaceShips();
+    user.randomlyPlaceShips();
+    expect(ai.getPlayerBoard().allPlaced()).toBeTruthy();
+    expect(user.getPlayerBoard().allPlaced()).toBeTruthy();
+    expect(user.attackForUserOnly(ai, 1, 1)).toBeTruthy();
+    expect(user.attackForUserOnly(ai, 1, 1)).toBeFalsy();
+});

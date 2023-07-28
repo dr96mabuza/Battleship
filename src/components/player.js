@@ -74,6 +74,11 @@ const player = ( name ) => {
         }
     };
 
+    /**
+     * A function that checks if the position attacked(selected) has been selected before.
+     * @param { String } string 
+     * @returns { Boolean }
+     */
     const checkIfAlreadyHit = (string) => attemptsHistory.toString().includes(string);
 
     /**
@@ -85,11 +90,12 @@ const player = ( name ) => {
      * @returns { Boolean }
      */
     const attack = ( opponentObject ) => {
-        while (true) {
+        while ( true ) {
             const outerIndex = generateRandomIndex();
             const innerIndex = generateRandomIndex();
             if (!checkIfAlreadyHit([outerIndex, innerIndex].toString())) {
                 opponentObject.getPlayerBoard().receiveAttack(outerIndex, innerIndex);
+                attemptsHistory.push([outerIndex, innerIndex]);
                 return true;
             }
         }
@@ -102,7 +108,13 @@ const player = ( name ) => {
      * @param { Number } innerIndex 
      */
     const attackForUserOnly = (opponentObject, outerIndex, innerIndex) => {
-        opponentObject.getPlayerBoard().receiveAttack(outerIndex, innerIndex)
+        if (!checkIfAlreadyHit([outerIndex, innerIndex].toString())) {
+            opponentObject.getPlayerBoard().receiveAttack(outerIndex, innerIndex);
+            attemptsHistory.push([outerIndex, innerIndex]);
+            return true;
+        } 
+        
+        return false;
     }
 
     return { 
