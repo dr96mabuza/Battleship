@@ -11,6 +11,7 @@ import ship from "./ship";
  */
 const player = ( name ) => {
 
+    const attemptsHistory = [];
     const board = gameBoard();
 
     /**
@@ -73,10 +74,43 @@ const player = ( name ) => {
         }
     };
 
+    const checkIfAlreadyHit = (string) => attemptsHistory.toString().includes(string);
+
+    /**
+     * A function that generates a random attack.
+     * \nAttack should be called if the user wants to attack random location or by computer.
+     * \nReturns "true" if attck has been carried out and "false" if not.
+     * 
+     * @param { Object } opponentObject 
+     * @returns { Boolean }
+     */
+    const attack = ( opponentObject ) => {
+        while (true) {
+            const outerIndex = generateRandomIndex();
+            const innerIndex = generateRandomIndex();
+            if (!checkIfAlreadyHit([outerIndex, innerIndex].toString())) {
+                opponentObject.getPlayerBoard().receiveAttack(outerIndex, innerIndex);
+                return true;
+            }
+        }
+    }
+
+    /**
+     * A function that attacks the opponent at the selected location.
+     * @param { Object } opponentObject 
+     * @param { Number } outerIndex 
+     * @param { Number } innerIndex 
+     */
+    const attackForUserOnly = (opponentObject, outerIndex, innerIndex) => {
+        opponentObject.getPlayerBoard().receiveAttack(outerIndex, innerIndex)
+    }
+
     return { 
         getName, 
         getPlayerBoard, 
-        randomlyPlaceShips 
+        randomlyPlaceShips, 
+        attack,
+        attackForUserOnly
     }
 
 };
