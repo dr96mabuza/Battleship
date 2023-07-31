@@ -1,6 +1,7 @@
 const renderBoard = ( board ) => {
     const body = document.querySelector("body");
     const boardHolder =  document.createElement("div");
+    console.log(board)
     board.forEach(element => {
         const column = document.createElement("div");
         column.setAttribute("id", "board-column");
