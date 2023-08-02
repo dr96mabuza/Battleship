@@ -10,11 +10,14 @@ const renderBoard = ( board ) => {
     // console.log(board)
     board.forEach(element => {
         const column = createDiv("column");
-        column.style.border = "solid black 2px";
+        // column.style.border = "solid black 2px";
+        column.style.width = "50px";
 
         element.forEach(item => {
             const row = createDiv("row");
-            row.textContent = item;
+            row.style.height = "50px";
+            row.style.border = "solid black 2px";
+            // row.textContent = ite;
             column.appendChild(row);
         })
 
