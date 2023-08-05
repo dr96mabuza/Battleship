@@ -13,17 +13,7 @@ const gameBoard = () => {
    *
    * @returns { Array }
    */
-  const generateBoard = () => {
-    const array = [];
-    for (let index = 0; index < 10; index++) {
-      const innerArray = [];
-      for (let j = 0; j < 10; j++) {
-        innerArray[j] = "";
-      }
-      array.push(innerArray);
-    }
-    return array;
-  };
+  const generateBoard = () => Array.from({length: 10}, () => Array(10).fill(""));
 
   const board = generateBoard();
   const placedShips = {      
